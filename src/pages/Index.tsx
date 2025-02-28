@@ -105,7 +105,7 @@ const Index = () => {
       </header>
 
       {/* Main Content */}
-      <main className="flex-1 relative z-10 overflow-auto">
+      <main className="flex-1 relative z-10 scrollbar-hide">
         <div className="container mx-auto">
           <section className="py-16 px-4 md:px-10">
             <div className="container mx-auto">
