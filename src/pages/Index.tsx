@@ -4,6 +4,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Link } from "react-router-dom";
+
 const blogPosts = [{
   id: 1,
   title: "The Art of Mindful Living",
@@ -33,36 +34,12 @@ const blogPosts = [{
   category: "Food",
   readTime: "7 min read"
 }];
+
 const Index = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    // Smooth scrolling functionality
-    const handleSmoothScroll = (event: WheelEvent) => {
-      if (scrollRef.current) {
-        event.preventDefault();
-        const scrollSpeed = 1.5; // Adjust for faster/slower scrolling
-        const targetScroll = scrollRef.current.scrollTop + event.deltaY * scrollSpeed;
-
-        // Smooth scroll animation
-        scrollRef.current.scrollTo({
-          top: targetScroll,
-          behavior: 'smooth'
-        });
-      }
-    };
-    const currentRef = scrollRef.current;
-    if (currentRef) {
-      currentRef.addEventListener('wheel', handleSmoothScroll, {
-        passive: false
-      });
-    }
-    return () => {
-      if (currentRef) {
-        currentRef.removeEventListener('wheel', handleSmoothScroll);
-      }
-    };
-  }, []);
-  return <div className="min-h-screen flex flex-col bg-black text-white">
+  
+  return (
+    <div className="min-h-screen flex flex-col bg-black text-white">
       {/* Video Background */}
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden z-0">
         <video autoPlay muted loop className="absolute min-w-full min-h-full object-cover opacity-40">
@@ -128,8 +105,8 @@ const Index = () => {
       </header>
 
       {/* Main Content */}
-      <main ref={scrollRef} className="flex-1 relative z-10 overflow-hidden">
-        <ScrollArea className="h-[calc(100vh-144px)]">
+      <main className="flex-1 relative z-10 overflow-auto">
+        <div className="container mx-auto">
           <section className="py-16 px-4 md:px-10">
             <div className="container mx-auto">
               <div className="mb-16 text-center">
@@ -214,8 +191,10 @@ const Index = () => {
               </div>
             </div>
           </footer>
-        </ScrollArea>
+        </div>
       </main>
-    </div>;
+    </div>
+  );
 };
+
 export default Index;
