@@ -1,5 +1,5 @@
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
@@ -34,6 +34,44 @@ const blogPosts = [{
   category: "Food",
   readTime: "7 min read"
 }];
+
+const RandomColorText = ({ children }: { children: React.ReactNode }) => {
+  const [color, setColor] = useState("#9b87f5");
+  
+  useEffect(() => {
+    const colors = [
+      "#9b87f5", // Primary Purple
+      "#7E69AB", // Secondary Purple
+      "#6E59A5", // Tertiary Purple
+      "#8B5CF6", // Vivid Purple
+      "#D946EF", // Magenta Pink
+      "#F97316", // Bright Orange
+      "#0EA5E9", // Ocean Blue
+      "#1EAEDB", // Bright Blue
+      "#33C3F0", // Sky Blue
+      "#0FA0CE"  // Another Bright Blue
+    ];
+    
+    const interval = setInterval(() => {
+      const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      setColor(randomColor);
+    }, 1500);
+    
+    return () => clearInterval(interval);
+  }, []);
+  
+  return (
+    <span style={{ 
+      color, 
+      transition: "color 0.7s ease-in-out",
+      WebkitTextFillColor: "transparent",
+      WebkitBackgroundClip: "text",
+      backgroundImage: `linear-gradient(to right, ${color}, ${color}CC)`
+    }}>
+      {children}
+    </span>
+  );
+};
 
 const Index = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -111,9 +149,9 @@ const Index = () => {
             <div className="container mx-auto">
               <div className="mb-16 text-center">
                 <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-pink-600">
+                  <RandomColorText>
                     Explore Our Latest Stories
-                  </span>
+                  </RandomColorText>
                 </h2>
                 <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto animate-fade-in">
                   Dive into a world of captivating stories, insightful perspectives, and thought-provoking ideas.
