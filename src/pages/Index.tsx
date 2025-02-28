@@ -1,57 +1,47 @@
-
 import { useEffect, useRef } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { NavigationMenu, NavigationMenuContent, NavigationMenuItem, NavigationMenuLink, NavigationMenuList, NavigationMenuTrigger, navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 import { Link } from "react-router-dom";
-
-const blogPosts = [
-  {
-    id: 1,
-    title: "The Art of Mindful Living",
-    excerpt: "Discover how mindfulness practices can transform your daily life and bring a sense of peace to your routine.",
-    date: "June 15, 2023",
-    category: "Lifestyle",
-    readTime: "5 min read"
-  },
-  {
-    id: 2,
-    title: "Exploring Hidden Gems in South America",
-    excerpt: "From the lush Amazon rainforest to the pristine beaches of Uruguay, South America offers countless hidden treasures.",
-    date: "May 28, 2023",
-    category: "Travel",
-    readTime: "8 min read"
-  },
-  {
-    id: 3,
-    title: "The Future of Sustainable Tech",
-    excerpt: "How eco-friendly innovations are reshaping the technology landscape and creating a more sustainable future.",
-    date: "April 10, 2023",
-    category: "Technology",
-    readTime: "6 min read"
-  },
-  {
-    id: 4,
-    title: "Essential Cooking Techniques Everyone Should Know",
-    excerpt: "Master these fundamental cooking methods to elevate your culinary skills and impress your dinner guests.",
-    date: "March 22, 2023",
-    category: "Food",
-    readTime: "7 min read"
-  }
-];
-
+const blogPosts = [{
+  id: 1,
+  title: "The Art of Mindful Living",
+  excerpt: "Discover how mindfulness practices can transform your daily life and bring a sense of peace to your routine.",
+  date: "June 15, 2023",
+  category: "Lifestyle",
+  readTime: "5 min read"
+}, {
+  id: 2,
+  title: "Exploring Hidden Gems in South America",
+  excerpt: "From the lush Amazon rainforest to the pristine beaches of Uruguay, South America offers countless hidden treasures.",
+  date: "May 28, 2023",
+  category: "Travel",
+  readTime: "8 min read"
+}, {
+  id: 3,
+  title: "The Future of Sustainable Tech",
+  excerpt: "How eco-friendly innovations are reshaping the technology landscape and creating a more sustainable future.",
+  date: "April 10, 2023",
+  category: "Technology",
+  readTime: "6 min read"
+}, {
+  id: 4,
+  title: "Essential Cooking Techniques Everyone Should Know",
+  excerpt: "Master these fundamental cooking methods to elevate your culinary skills and impress your dinner guests.",
+  date: "March 22, 2023",
+  category: "Food",
+  readTime: "7 min read"
+}];
 const Index = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     // Smooth scrolling functionality
     const handleSmoothScroll = (event: WheelEvent) => {
       if (scrollRef.current) {
         event.preventDefault();
-        
         const scrollSpeed = 1.5; // Adjust for faster/slower scrolling
-        const targetScroll = scrollRef.current.scrollTop + (event.deltaY * scrollSpeed);
-        
+        const targetScroll = scrollRef.current.scrollTop + event.deltaY * scrollSpeed;
+
         // Smooth scroll animation
         scrollRef.current.scrollTo({
           top: targetScroll,
@@ -59,29 +49,22 @@ const Index = () => {
         });
       }
     };
-
     const currentRef = scrollRef.current;
     if (currentRef) {
-      currentRef.addEventListener('wheel', handleSmoothScroll, { passive: false });
+      currentRef.addEventListener('wheel', handleSmoothScroll, {
+        passive: false
+      });
     }
-
     return () => {
       if (currentRef) {
         currentRef.removeEventListener('wheel', handleSmoothScroll);
       }
     };
   }, []);
-
-  return (
-    <div className="min-h-screen flex flex-col bg-black text-white">
+  return <div className="min-h-screen flex flex-col bg-black text-white">
       {/* Video Background */}
       <div className="fixed top-0 left-0 w-full h-full overflow-hidden z-0">
-        <video
-          autoPlay
-          muted
-          loop
-          className="absolute min-w-full min-h-full object-cover opacity-40"
-        >
+        <video autoPlay muted loop className="absolute min-w-full min-h-full object-cover opacity-40">
           <source src="https://assets.mixkit.co/videos/preview/mixkit-ink-swirling-in-slow-motion-169-large.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
@@ -107,18 +90,13 @@ const Index = () => {
                   <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {["Lifestyle", "Travel", "Technology", "Food", "Health", "Culture"].map((category) => (
-                        <li key={category}>
+                      {["Lifestyle", "Travel", "Technology", "Food", "Health", "Culture"].map(category => <li key={category}>
                           <NavigationMenuLink asChild>
-                            <a
-                              href="#"
-                              className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
-                            >
+                            <a href="#" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                               <div className="text-sm font-medium leading-none">{category}</div>
                             </a>
                           </NavigationMenuLink>
-                        </li>
-                      ))}
+                        </li>)}
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -138,9 +116,9 @@ const Index = () => {
             <div className="md:hidden">
               <button aria-label="Toggle menu" className="p-2">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M3 6H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M3 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M3 6H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  <path d="M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
             </div>
@@ -165,8 +143,7 @@ const Index = () => {
               </div>
               
               <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-2">
-                {blogPosts.map((post) => (
-                  <Card key={post.id} className="bg-black/50 backdrop-blur-md border-gray-800 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 hover-scale">
+                {blogPosts.map(post => <Card key={post.id} className="bg-black/50 backdrop-blur-md border-gray-800 hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300 hover-scale">
                     <CardHeader>
                       <div className="flex justify-between items-center mb-2">
                         <span className="text-xs text-purple-400">{post.category}</span>
@@ -183,12 +160,11 @@ const Index = () => {
                         Read more
                       </Link>
                     </CardFooter>
-                  </Card>
-                ))}
+                  </Card>)}
               </div>
               
               <div className="mt-16 text-center">
-                <button className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white font-medium hover:from-purple-600 hover:to-pink-700 transition-all duration-300 animate-pulse">
+                <button className="px-6 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white font-medium hover:from-purple-600 hover:to-pink-700 transition-all duration-300">
                   Load More Stories
                 </button>
               </div>
@@ -204,11 +180,7 @@ const Index = () => {
                   </span>
                 </h2>
                 <div className="flex flex-col md:flex-row gap-4">
-                  <input 
-                    type="email" 
-                    placeholder="Enter your email address" 
-                    className="flex-1 rounded-full px-6 py-3 bg-black/50 border border-purple-500/30 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 text-white"
-                  />
+                  <input type="email" placeholder="Enter your email address" className="flex-1 rounded-full px-6 py-3 bg-black/50 border border-purple-500/30 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 text-white" />
                   <button className="rounded-full px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-600 text-white font-medium hover:from-purple-600 hover:to-pink-700 transition-all duration-300">
                     Subscribe
                   </button>
@@ -231,11 +203,9 @@ const Index = () => {
                 </p>
                 <div className="flex justify-center space-x-6 mb-8">
                   {/* Social Media Icons */}
-                  {["Facebook", "Twitter", "Instagram", "LinkedIn"].map((social) => (
-                    <a href="#" key={social} className="text-gray-400 hover:text-white transition-colors">
+                  {["Facebook", "Twitter", "Instagram", "LinkedIn"].map(social => <a href="#" key={social} className="text-gray-400 hover:text-white transition-colors">
                       {social}
-                    </a>
-                  ))}
+                    </a>)}
                 </div>
                 <div className="text-sm text-gray-500">
                   © {new Date().getFullYear()} Luminous Blog. All rights reserved.
@@ -245,8 +215,6 @@ const Index = () => {
           </footer>
         </ScrollArea>
       </main>
-    </div>
-  );
+    </div>;
 };
-
 export default Index;
