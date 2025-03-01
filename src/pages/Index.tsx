@@ -37,6 +37,7 @@ const blogPosts = [{
 
 const RandomColorText = ({ children }: { children: React.ReactNode }) => {
   const [color, setColor] = useState("#9b87f5");
+  const [secondColor, setSecondColor] = useState("#D946EF");
   
   useEffect(() => {
     const colors = [
@@ -54,7 +55,9 @@ const RandomColorText = ({ children }: { children: React.ReactNode }) => {
     
     const interval = setInterval(() => {
       const randomColor = colors[Math.floor(Math.random() * colors.length)];
+      const secondRandomColor = colors[Math.floor(Math.random() * colors.length)];
       setColor(randomColor);
+      setSecondColor(secondRandomColor);
     }, 1500);
     
     return () => clearInterval(interval);
@@ -62,12 +65,22 @@ const RandomColorText = ({ children }: { children: React.ReactNode }) => {
   
   return (
     <span style={{ 
-      color, 
-      transition: "color 0.7s ease-in-out",
+      transition: "all 0.7s ease-in-out",
       WebkitTextFillColor: "transparent",
       WebkitBackgroundClip: "text",
-      backgroundImage: `linear-gradient(to right, ${color}, ${color}CC)`
+      backgroundImage: `linear-gradient(to right, ${color}, ${secondColor})`,
+      backgroundSize: "200% 100%",
+      animation: "gradient-shift 3s ease infinite"
     }}>
+      <style>
+        {`
+          @keyframes gradient-shift {
+            0% { background-position: 0% 50% }
+            50% { background-position: 100% 50% }
+            100% { background-position: 0% 50% }
+          }
+        `}
+      </style>
       {children}
     </span>
   );
