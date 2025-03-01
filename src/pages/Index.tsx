@@ -96,9 +96,10 @@ const GlowingButton = ({ children, href }: { children: React.ReactNode; href: st
                 transition-all duration-300 hover:from-yellow-300 hover:to-yellow-500
                 shadow-[0_0_15px_rgba(253,224,71,0.5)]
                 hover:shadow-[0_0_25px_rgba(253,224,71,0.8)]
-                animate-pulse"
+                hover:scale-105"
     >
-      {children}
+      <span className="relative z-10">{children}</span>
+      <span className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-300 to-yellow-500 opacity-0 hover:opacity-30 hover:blur-md transition-all duration-300 hover:blur-xl"></span>
     </a>
   );
 };
