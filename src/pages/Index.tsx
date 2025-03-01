@@ -134,31 +134,42 @@ const Index = () => {
               <NavigationMenu className="hidden md:block">
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#">
+                    <NavigationMenuLink 
+                      className={`${navigationMenuTriggerStyle()} text-black bg-white/80 hover:bg-white hover:scale-105 transition-transform duration-300`} 
+                      href="#"
+                    >
                       Home
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
+                    <NavigationMenuTrigger className="text-black bg-white/80 hover:bg-white hover:scale-105 transition-transform duration-300">Categories</NavigationMenuTrigger>
                     <NavigationMenuContent>
                       <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                        {["Lifestyle", "Travel", "Technology", "Food", "Health", "Culture"].map(category => <li key={category}>
+                        {["Lifestyle", "Travel", "Technology", "Food", "Health", "Culture"].map(category => (
+                          <li key={category}>
                             <NavigationMenuLink asChild>
                               <a href="#" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
                                 <div className="text-sm font-medium leading-none">{category}</div>
                               </a>
                             </NavigationMenuLink>
-                          </li>)}
+                          </li>
+                        ))}
                       </ul>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
-                    <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#">
+                    <NavigationMenuLink 
+                      className={`${navigationMenuTriggerStyle()} text-black bg-white/80 hover:bg-white hover:scale-105 transition-transform duration-300`} 
+                      href="#"
+                    >
                       About
                     </NavigationMenuLink>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
-                    <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#">
+                    <NavigationMenuLink 
+                      className={`${navigationMenuTriggerStyle()} text-black bg-white/80 hover:bg-white hover:scale-105 transition-transform duration-300`} 
+                      href="#"
+                    >
                       Contact
                     </NavigationMenuLink>
                   </NavigationMenuItem>
