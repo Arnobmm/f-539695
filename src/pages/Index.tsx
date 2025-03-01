@@ -1,4 +1,3 @@
-
 import { useEffect, useRef, useState } from "react";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -86,6 +85,24 @@ const RandomColorText = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
+const GlowingButton = ({ children, href }: { children: React.ReactNode; href: string }) => {
+  return (
+    <a 
+      href={href} 
+      target="_blank" 
+      rel="noopener noreferrer"
+      className="relative px-6 py-3 rounded-full font-medium text-black 
+                bg-gradient-to-r from-yellow-200 to-yellow-400
+                transition-all duration-300 hover:from-yellow-300 hover:to-yellow-500
+                shadow-[0_0_15px_rgba(253,224,71,0.5)]
+                hover:shadow-[0_0_25px_rgba(253,224,71,0.8)]
+                animate-pulse"
+    >
+      {children}
+    </a>
+  );
+};
+
 const Index = () => {
   const scrollRef = useRef<HTMLDivElement>(null);
   
@@ -108,48 +125,54 @@ const Index = () => {
               Luminous Blog
             </h1>
             
-            <NavigationMenu className="hidden md:block">
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#">
-                    Home
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                      {["Lifestyle", "Travel", "Technology", "Food", "Health", "Culture"].map(category => <li key={category}>
-                          <NavigationMenuLink asChild>
-                            <a href="#" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
-                              <div className="text-sm font-medium leading-none">{category}</div>
-                            </a>
-                          </NavigationMenuLink>
-                        </li>)}
-                    </ul>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#">
-                    About
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#">
-                    Contact
-                  </NavigationMenuLink>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
-            
-            <div className="md:hidden">
-              <button aria-label="Toggle menu" className="p-2">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M3 6H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
+            <div className="flex items-center gap-4">
+              <GlowingButton href="https://arnobmm.github.io/lemon.github.io/">
+                Chatbox
+              </GlowingButton>
+              
+              <NavigationMenu className="hidden md:block">
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#">
+                      Home
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger>Categories</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                        {["Lifestyle", "Travel", "Technology", "Food", "Health", "Culture"].map(category => <li key={category}>
+                            <NavigationMenuLink asChild>
+                              <a href="#" className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground">
+                                <div className="text-sm font-medium leading-none">{category}</div>
+                              </a>
+                            </NavigationMenuLink>
+                          </li>)}
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#">
+                      About
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                  <NavigationMenuItem>
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()} href="#">
+                      Contact
+                    </NavigationMenuLink>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+              
+              <div className="md:hidden">
+                <button aria-label="Toggle menu" className="p-2">
+                  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 12H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M3 6H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
         </div>
